@@ -1,12 +1,5 @@
-QWidget#novaDesktop {
+QWidget#novuxDesktop {
     background-color: #080B14;
-    background-image: qlineargradient(
-        x1: 0, y1: 0,
-        x2: 1, y2: 1,
-        stop: 0 #080B14,
-        stop: 0.5 #10172A,
-        stop: 1 #080B14
-    );
     color: #E8EEFF;
     font-family: "Segoe UI";
 }
@@ -18,10 +11,10 @@ QLabel {
     color: #E8EEFF;
 }
 
-/* TOP PANEL */
+/* TOP SYSTEM PANEL */
 
 QFrame#topPanel {
-    background-color: rgba(19, 27, 47, 220);
+    background-color: #131B2F;
     border: 1px solid #253450;
     border-radius: 14px;
 }
@@ -30,7 +23,6 @@ QLabel#logo {
     color: #48DDF5;
     font-size: 18px;
     font-weight: bold;
-    letter-spacing: 2px;
 }
 
 QLabel#systemStatus {
@@ -51,43 +43,82 @@ QLabel#clockLabel {
     font-weight: bold;
 }
 
-/* DESKTOP BRANDING */
+/* DESKTOP WORKSPACE */
 
-QLabel#heroTitle {
-    color: #48DDF5;
-    font-size: 76px;
-    font-weight: bold;
-    letter-spacing: 15px;
+QMdiArea#workspace {
+    background-color: #0B1020;
+    border: 1px solid #1D2A43;
+    border-radius: 14px;
 }
 
-QLabel#heroSubtitle {
-    color: #7889AA;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 5px;
-}
-
-/* DESKTOP ICONS */
+/* DESKTOP SHORTCUTS */
 
 QPushButton#desktopIcon {
-    background-color: rgba(22, 34, 57, 150);
+    background-color: #162239;
     border: 1px solid transparent;
     border-radius: 12px;
     color: #DCE8FF;
-    font-size: 13px;
-    padding: 8px;
+    font-size: 12px;
+    padding: 6px;
 }
 
 QPushButton#desktopIcon:hover {
-    background-color: rgba(43, 67, 105, 210);
+    background-color: #263D60;
     border: 1px solid #48DDF5;
     color: #FFFFFF;
+}
+
+/* APPLICATION WINDOWS */
+
+QMdiSubWindow#applicationWindow {
+    background-color: #111A2C;
+    border: 1px solid #48DDF5;
+    border-radius: 9px;
+}
+
+QWidget#appWindowContent {
+    background-color: #111A2C;
+    border: none;
+}
+
+QLabel#appTitle {
+    color: #48DDF5;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+QLabel#appDescription {
+    color: #A3B2CE;
+    font-size: 12px;
+}
+
+QFrame#appSeparator {
+    background-color: #293B58;
+    border: none;
+}
+
+QLabel#sectionTitle {
+    color: #48DDF5;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+QLabel#featureLabel {
+    color: #D5DFF2;
+    font-size: 13px;
+    padding: 5px;
+}
+
+QLabel#appStatus {
+    color: #65E6B4;
+    font-size: 10px;
+    font-weight: bold;
 }
 
 /* APPLICATION DOCK */
 
 QFrame#dock {
-    background-color: rgba(20, 29, 49, 235);
+    background-color: #141D31;
     border: 1px solid #304362;
     border-radius: 20px;
 }
@@ -104,6 +135,79 @@ QPushButton#dockButton {
 QPushButton#dockButton:hover {
     background-color: #263D60;
     border: 1px solid #48DDF5;
+}
+
+/* ==========================================
+   NOVUX SYSTEM MONITOR
+   ========================================== */
+
+QWidget#systemMonitor {
+    background-color: #0F1728;
+    color: #E8EEFF;
+}
+
+QLabel#monitorTitle {
+    color: #48DDF5;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+QLabel#monitorSubtitle {
+    color: #8B9AB8;
+    font-size: 12px;
+}
+
+/* RESOURCE CARDS */
+
+QFrame#monitorCard {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 12px;
+}
+
+QLabel#monitorCardTitle {
+    color: #8B9AB8;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+QLabel#monitorCardValue {
+    color: #48DDF5;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+/* PROGRESS BARS */
+
+QProgressBar#monitorProgress {
+    background-color: #263650;
+    border: none;
+    border-radius: 4px;
+}
+
+QProgressBar#monitorProgress::chunk {
+    background-color: #48DDF5;
+    border-radius: 4px;
+}
+
+/* SYSTEM INFORMATION */
+
+QFrame#monitorInfoPanel {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 12px;
+}
+
+QLabel#monitorSectionTitle {
+    color: #48DDF5;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+QLabel#monitorInfoLabel {
+    color: #D5DFF2;
+    font-size: 12px;
+    padding: 3px;
 }
 
 /* DIALOGS */
@@ -126,4 +230,27 @@ QMessageBox QPushButton {
 
 QMessageBox QPushButton:hover {
     background-color: #245C79;
+}
+
+/* SCROLLBARS */
+
+QScrollBar:vertical {
+    background-color: #10172A;
+    width: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #304362;
+    border-radius: 4px;
+    min-height: 25px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #48DDF5;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
 }
