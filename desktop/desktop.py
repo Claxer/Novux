@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from PySide6.QtCore import Qt, QTimer
+from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -8,75 +9,81 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QFrame,
-    QMessageBox,
-    QSpacerItem,
-    QSizePolicy,
+    QMdiArea,
+    QMdiSubWindow,
 )
 
+from apps.system_monitor import SystemMonitor
 
-class NovaDesktop(QWidget):
+
+class NovuxDesktop(QWidget):
 
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("NOVA OS")
+        self.setWindowTitle("Novux")
+        self.setObjectName("novuxDesktop")
         self.setMinimumSize(900, 600)
 
         self.setup_ui()
         self.start_clock()
 
+    # ==========================================
+    # MAIN DESKTOP
+    # ==========================================
+
     def setup_ui(self):
 
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(24, 16, 24, 18)
-        main_layout.setSpacing(0)
+        main_layout.setSpacing(14)
 
-        # TOP PANEL
-        top_panel = self.create_top_panel()
-        main_layout.addWidget(top_panel)
+        # TOP SYSTEM PANEL
+        main_layout.addWidget(self.create_top_panel())
 
-        main_layout.addSpacing(35)
+        # DESKTOP WORKSPACE
+        workspace_layout = QHBoxLayout()
+        workspace_layout.setSpacing(15)
 
-        # DESKTOP CONTENT
-        content_layout = QHBoxLayout()
-        content_layout.setSpacing(20)
-
-        left_content = self.create_desktop_icons()
-
-        content_layout.addWidget(
-            left_content,
-            alignment=Qt.AlignmentFlag.AlignTop
+        workspace_layout.addWidget(
+            self.create_desktop_icons()
         )
 
-        content_layout.addStretch()
+        self.workspace = QMdiArea()
+        self.workspace.setObjectName("workspace")
 
-        main_layout.addLayout(content_layout, 1)
+        self.workspace.setViewMode(
+            QMdiArea.ViewMode.SubWindowView
+        )
 
-        # CENTER DESKTOP MESSAGE
-        center_layout = QVBoxLayout()
-        center_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.workspace.setBackground(
+            QColor("#0B1020")
+        )
 
-        title = QLabel("NOVA")
-        title.setObjectName("heroTitle")
-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.workspace.setOption(
+            QMdiArea.AreaOption.DontMaximizeSubWindowOnActivation,
+            True
+        )
 
-        subtitle = QLabel("YOUR SYSTEM. YOUR UNIVERSE.")
-        subtitle.setObjectName("heroSubtitle")
-        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        workspace_layout.addWidget(
+            self.workspace,
+            1
+        )
 
-        center_layout.addWidget(title)
-        center_layout.addWidget(subtitle)
+        main_layout.addLayout(
+            workspace_layout,
+            1
+        )
 
-        main_layout.addLayout(center_layout, 2)
-
-        # BOTTOM DOCK
-        main_layout.addStretch()
-
-        dock = self.create_dock()
+        # APPLICATION DOCK
         main_layout.addWidget(
-            dock,
+            self.create_dock(),
             alignment=Qt.AlignmentFlag.AlignHCenter
         )
+
+    # ==========================================
+    # TOP SYSTEM PANEL
+    # ==========================================
 
     def create_top_panel(self):
 
@@ -88,7 +95,7 @@ class NovaDesktop(QWidget):
         layout.setContentsMargins(20, 0, 20, 0)
         layout.setSpacing(18)
 
-        logo = QLabel("✦  NOVA OS")
+        logo = QLabel("✦  NOVUX")
         logo.setObjectName("logo")
 
         system_label = QLabel("SYSTEM ONLINE")
@@ -100,10 +107,10 @@ class NovaDesktop(QWidget):
 
         layout.addStretch()
 
-        cpu_label = QLabel("CPU  •  READY")
+        cpu_label = QLabel("CPU  •  MONITORING")
         cpu_label.setObjectName("statusLabel")
 
-        ram_label = QLabel("MEMORY  •  READY")
+        ram_label = QLabel("MEMORY  •  MONITORING")
         ram_label.setObjectName("statusLabel")
 
         self.clock_label = QLabel()
@@ -116,12 +123,18 @@ class NovaDesktop(QWidget):
 
         return panel
 
+    # ==========================================
+    # DESKTOP SHORTCUTS
+    # ==========================================
+
     def create_desktop_icons(self):
 
         container = QWidget()
-        layout = QVBoxLayout(container)
+        container.setObjectName("desktopIcons")
+        container.setFixedWidth(105)
 
-        layout.setContentsMargins(0, 0, 0, 0)
+        layout = QVBoxLayout(container)
+        layout.setContentsMargins(0, 10, 0, 10)
         layout.setSpacing(16)
 
         applications = [
@@ -135,7 +148,7 @@ class NovaDesktop(QWidget):
 
             button = QPushButton(f"{icon}\n{name}")
             button.setObjectName("desktopIcon")
-            button.setFixedSize(105, 85)
+            button.setFixedSize(100, 78)
 
             button.clicked.connect(
                 lambda checked=False, key=app_id:
@@ -147,6 +160,10 @@ class NovaDesktop(QWidget):
         layout.addStretch()
 
         return container
+
+    # ==========================================
+    # APPLICATION DOCK
+    # ==========================================
 
     def create_dock(self):
 
@@ -182,10 +199,193 @@ class NovaDesktop(QWidget):
 
         return dock
 
+    # ==========================================
+    # APPLICATION WINDOW CONTENT
+    # ==========================================
+
+    def create_application_content(self, app_id):
+
+        applications = {
+            "home": {
+                "title": "Novux Dashboard",
+                "description": "Welcome to your Novux desktop environment.",
+                "features": [
+                    "Desktop Environment",
+                    "Application Management",
+                    "System Utilities",
+                    "Personalized Workspace",
+                ],
+            },
+
+            "files": {
+                "title": "File Manager",
+                "description": "Manage and organize your files.",
+                "features": [
+                    "Directory Navigation",
+                    "File Organization",
+                    "Folder Management",
+                    "Storage Information",
+                ],
+            },
+
+            "terminal": {
+                "title": "Novux Terminal",
+                "description": "Your command-line environment.",
+                "features": [
+                    "Custom Commands",
+                    "Directory Navigation",
+                    "System Information",
+                    "Command Execution",
+                ],
+            },
+
+            "settings": {
+                "title": "System Settings",
+                "description": "Configure your Novux environment.",
+                "features": [
+                    "Appearance Settings",
+                    "Desktop Preferences",
+                    "System Configuration",
+                    "User Preferences",
+                ],
+            },
+        }
+
+        data = applications.get(app_id)
+
+        if data is None:
+            return QWidget()
+
+        content = QWidget()
+        content.setObjectName("appWindowContent")
+
+        layout = QVBoxLayout(content)
+        layout.setContentsMargins(25, 25, 25, 25)
+        layout.setSpacing(15)
+
+        title = QLabel(data["title"])
+        title.setObjectName("appTitle")
+
+        description = QLabel(data["description"])
+        description.setObjectName("appDescription")
+        description.setWordWrap(True)
+
+        layout.addWidget(title)
+        layout.addWidget(description)
+
+        separator = QFrame()
+        separator.setObjectName("appSeparator")
+        separator.setFixedHeight(1)
+
+        layout.addWidget(separator)
+
+        features_title = QLabel("AVAILABLE MODULES")
+        features_title.setObjectName("sectionTitle")
+
+        layout.addWidget(features_title)
+
+        for feature in data["features"]:
+
+            feature_label = QLabel(f"  •  {feature}")
+            feature_label.setObjectName("featureLabel")
+
+            layout.addWidget(feature_label)
+
+        layout.addStretch()
+
+        status = QLabel("NOVUX  /  MODULE INITIALIZED")
+        status.setObjectName("appStatus")
+
+        layout.addWidget(status)
+
+        return content
+
+    # ==========================================
+    # WINDOW MANAGEMENT
+    # ==========================================
+
+    def open_application(self, app_id):
+
+        # Check whether the application is already open.
+        for window in self.workspace.subWindowList():
+
+            if window.property("app_id") == app_id:
+
+                if window.isMinimized():
+                    window.showNormal()
+
+                window.show()
+                window.raise_()
+                window.activateWindow()
+
+                self.workspace.setActiveSubWindow(window)
+
+                return
+
+        applications = {
+            "home": "Novux Dashboard",
+            "files": "File Manager",
+            "terminal": "Novux Terminal",
+            "processes": "System Monitor",
+            "settings": "System Settings",
+        }
+
+        title = applications.get(app_id)
+
+        if title is None:
+            return
+
+        window = QMdiSubWindow()
+
+        window.setObjectName("applicationWindow")
+        window.setProperty("app_id", app_id)
+        window.setWindowTitle(title)
+
+        # Load the real System Monitor.
+        if app_id == "processes":
+            content = SystemMonitor()
+        else:
+            content = self.create_application_content(app_id)
+
+        window.setWidget(content)
+
+        window.setMinimumSize(550, 400)
+        window.resize(850, 600)
+
+        window.setAttribute(
+            Qt.WidgetAttribute.WA_DeleteOnClose,
+            True
+        )
+
+        self.workspace.addSubWindow(window)
+
+        # Position new windows.
+        open_count = len(self.workspace.subWindowList())
+        offset = (open_count - 1) * 30
+
+        window.move(
+            35 + offset,
+            35 + offset
+        )
+
+        window.show()
+        window.raise_()
+        window.activateWindow()
+
+        self.workspace.setActiveSubWindow(window)
+
+    # ==========================================
+    # LIVE CLOCK
+    # ==========================================
+
     def start_clock(self):
 
         self.timer = QTimer(self)
-        self.timer.timeout.connect(self.update_clock)
+
+        self.timer.timeout.connect(
+            self.update_clock
+        )
+
         self.timer.start(1000)
 
         self.update_clock()
@@ -197,32 +397,3 @@ class NovaDesktop(QWidget):
         self.clock_label.setText(
             now.strftime("%I:%M %p  |  %b %d, %Y")
         )
-
-    def open_application(self, app_id):
-
-        applications = {
-            "home": "NOVA Desktop",
-            "files": "File Manager",
-            "terminal": "NOVA Terminal",
-            "processes": "Process Manager",
-            "settings": "System Settings",
-        }
-
-        application_name = applications.get(
-            app_id,
-            "Unknown Application"
-        )
-
-        QMessageBox.information(
-            self,
-            application_name,
-            f"{application_name} is not available yet.\n\n"
-            "This application will be developed in a future phase."
-        )
-
-    def keyPressEvent(self, event):
-
-        if event.key() == Qt.Key.Key_Escape:
-            self.showNormal()
-        else:
-            super().keyPressEvent(event)
