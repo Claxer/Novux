@@ -4,8 +4,6 @@ QWidget#novuxDesktop {
     font-family: "Segoe UI";
 }
 
-/* GENERAL */
-
 QLabel {
     background: transparent;
     color: #E8EEFF;
@@ -138,7 +136,7 @@ QPushButton#dockButton:hover {
 }
 
 /* ==========================================
-   NOVUX SYSTEM MONITOR
+   SYSTEM MONITOR
    ========================================== */
 
 QWidget#systemMonitor {
@@ -156,8 +154,6 @@ QLabel#monitorSubtitle {
     color: #8B9AB8;
     font-size: 12px;
 }
-
-/* RESOURCE CARDS */
 
 QFrame#monitorCard {
     background-color: #17243B;
@@ -177,8 +173,6 @@ QLabel#monitorCardValue {
     font-weight: bold;
 }
 
-/* PROGRESS BARS */
-
 QProgressBar#monitorProgress {
     background-color: #263650;
     border: none;
@@ -189,8 +183,6 @@ QProgressBar#monitorProgress::chunk {
     background-color: #48DDF5;
     border-radius: 4px;
 }
-
-/* SYSTEM INFORMATION */
 
 QFrame#monitorInfoPanel {
     background-color: #17243B;
@@ -208,6 +200,123 @@ QLabel#monitorInfoLabel {
     color: #D5DFF2;
     font-size: 12px;
     padding: 3px;
+}
+
+/* ==========================================
+   PROCESS MANAGER
+   ========================================== */
+
+QWidget#processManager {
+    background-color: #0F1728;
+    color: #E8EEFF;
+}
+
+QLabel#processTitle {
+    color: #48DDF5;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+QLabel#processSubtitle {
+    color: #8B9AB8;
+    font-size: 12px;
+}
+
+/* PROCESS SUMMARY */
+
+QFrame#processSummary {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 10px;
+}
+
+QLabel#processSummaryValue {
+    color: #48DDF5;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QLabel#processSummaryStatus {
+    color: #65E6B4;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* SEARCH */
+
+QLineEdit#processSearch {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 8px;
+    color: #E8EEFF;
+    padding: 10px;
+    font-size: 12px;
+}
+
+QLineEdit#processSearch:focus {
+    border: 1px solid #48DDF5;
+}
+
+/* REFRESH BUTTON */
+
+QPushButton#processRefreshButton {
+    background-color: #173A55;
+    border: 1px solid #48DDF5;
+    border-radius: 8px;
+    color: white;
+    padding: 9px 18px;
+    font-weight: bold;
+}
+
+QPushButton#processRefreshButton:hover {
+    background-color: #245C79;
+}
+
+/* PROCESS TABLE */
+
+QTableWidget#processTable {
+    background-color: #111A2C;
+    alternate-background-color: #162239;
+    border: 1px solid #304362;
+    border-radius: 8px;
+    color: #DCE8FF;
+    gridline-color: #263650;
+    selection-background-color: #17465C;
+    selection-color: #FFFFFF;
+}
+
+QTableWidget#processTable::item {
+    padding: 7px;
+}
+
+QHeaderView::section {
+    background-color: #17243B;
+    color: #48DDF5;
+    border: none;
+    border-bottom: 1px solid #304362;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* PROCESS CONTROLS */
+
+QLabel#processSelectedLabel {
+    color: #8B9AB8;
+    font-size: 11px;
+}
+
+QPushButton#processEndButton {
+    background-color: #4A202D;
+    border: 1px solid #D95B72;
+    border-radius: 8px;
+    color: #FFFFFF;
+    padding: 9px 18px;
+    font-weight: bold;
+}
+
+QPushButton#processEndButton:hover {
+    background-color: #713044;
 }
 
 /* DIALOGS */
