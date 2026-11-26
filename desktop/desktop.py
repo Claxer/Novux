@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
 )
 
 from apps.system_monitor import SystemMonitor
+from apps.process_manager import ProcessManager
 
 
 class NovuxDesktop(QWidget):
@@ -38,10 +39,8 @@ class NovuxDesktop(QWidget):
         main_layout.setContentsMargins(24, 16, 24, 18)
         main_layout.setSpacing(14)
 
-        # TOP SYSTEM PANEL
         main_layout.addWidget(self.create_top_panel())
 
-        # DESKTOP WORKSPACE
         workspace_layout = QHBoxLayout()
         workspace_layout.setSpacing(15)
 
@@ -75,7 +74,6 @@ class NovuxDesktop(QWidget):
             1
         )
 
-        # APPLICATION DOCK
         main_layout.addWidget(
             self.create_dock(),
             alignment=Qt.AlignmentFlag.AlignHCenter
@@ -141,6 +139,7 @@ class NovuxDesktop(QWidget):
             ("▣", "My Files", "files"),
             ("⌘", "Terminal", "terminal"),
             ("▤", "Processes", "processes"),
+            ("◉", "System Monitor", "monitor"),
             ("⚙", "Settings", "settings"),
         ]
 
@@ -180,6 +179,7 @@ class NovuxDesktop(QWidget):
             ("▣", "Files", "files"),
             ("⌘", "Terminal", "terminal"),
             ("▤", "Processes", "processes"),
+            ("◉", "Monitor", "monitor"),
             ("⚙", "Settings", "settings"),
         ]
 
@@ -306,7 +306,6 @@ class NovuxDesktop(QWidget):
 
     def open_application(self, app_id):
 
-        # Check whether the application is already open.
         for window in self.workspace.subWindowList():
 
             if window.property("app_id") == app_id:
@@ -326,7 +325,8 @@ class NovuxDesktop(QWidget):
             "home": "Novux Dashboard",
             "files": "File Manager",
             "terminal": "Novux Terminal",
-            "processes": "System Monitor",
+            "processes": "Process Manager",
+            "monitor": "System Monitor",
             "settings": "System Settings",
         }
 
@@ -341,16 +341,23 @@ class NovuxDesktop(QWidget):
         window.setProperty("app_id", app_id)
         window.setWindowTitle(title)
 
-        # Load the real System Monitor.
         if app_id == "processes":
+            content = ProcessManager()
+
+        elif app_id == "monitor":
             content = SystemMonitor()
+
         else:
             content = self.create_application_content(app_id)
 
         window.setWidget(content)
 
-        window.setMinimumSize(550, 400)
-        window.resize(850, 600)
+        if app_id in ("processes", "monitor"):
+            window.setMinimumSize(750, 480)
+            window.resize(950, 650)
+        else:
+            window.setMinimumSize(360, 260)
+            window.resize(520, 380)
 
         window.setAttribute(
             Qt.WidgetAttribute.WA_DeleteOnClose,
@@ -359,7 +366,6 @@ class NovuxDesktop(QWidget):
 
         self.workspace.addSubWindow(window)
 
-        # Position new windows.
         open_count = len(self.workspace.subWindowList())
         offset = (open_count - 1) * 30
 
