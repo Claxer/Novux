@@ -1,8 +1,8 @@
 # Novux — Futuristic Desktop Environment
 
-Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, and a clean, dark-themed design.
+Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, process management, and a clean, dark-themed design.
 
-The project is currently under active development, with its desktop interface and initial system monitoring functionality implemented.
+The project is currently under active development, with its desktop interface, application window management, System Monitor, and Process Manager implemented.
 
 ## Implemented Features
 
@@ -28,12 +28,21 @@ The project is currently under active development, with its desktop interface an
 - **Hardware Information** — Shows processor details, core counts, total RAM, and system drive capacity.
 - **Automatic Updates** — Refreshes system statistics every second.
 
+### Process Manager
+- **Running Process List** — Displays currently running system processes.
+- **Process Information** — Shows process IDs (PID), names, CPU usage, and memory consumption.
+- **Process Search** — Search for processes using their names or PIDs.
+- **Manual Refresh** — Refresh the process list when needed.
+- **Automatic Refresh** — Updates the process list periodically.
+- **End Process** — Allows users to terminate selected processes with a confirmation prompt.
+- **Process Protection** — Includes basic safeguards for selected protected processes.
+
 ## Technologies Used
 
 - **Python 3.14** — Main programming language.
 - **PySide6** — Desktop application framework.
 - **Qt Style Sheets (QSS)** — Interface styling and customization.
-- **psutil** — System and hardware monitoring.
+- **psutil** — System monitoring and process management.
 - **Visual Studio Code** — Development environment.
 
 ## Project Structure
@@ -43,7 +52,8 @@ Novux/
 ├── main.py
 ├── apps/
 │   ├── __init__.py
-│   └── system_monitor.py
+│   ├── system_monitor.py
+│   └── process_manager.py
 ├── desktop/
 │   ├── __init__.py
 │   └── desktop.py
@@ -107,12 +117,13 @@ python main.py
 | Application Dock | Completed |
 | Window Management | Completed |
 | System Monitor | Implemented and Tested |
+| Process Manager | Implemented |
 
 ## Project Status
 
-Novux is currently in active development. The initial desktop environment, application window management, and System Monitor have been implemented and tested.
+Novux is currently in active development. The desktop environment, application window management, System Monitor, and Process Manager have been implemented.
 
-Future development will focus on expanding the desktop environment with additional built-in applications and system utilities.
+Future development will focus on expanding the desktop environment with additional built-in applications and system utilities, improving existing functionality, and introducing more advanced desktop features.
 
 ## License
 
