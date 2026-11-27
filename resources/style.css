@@ -319,6 +319,109 @@ QPushButton#processEndButton:hover {
     background-color: #713044;
 }
 
+/* ==========================================
+   FILE MANAGER
+   ========================================== */
+
+QWidget#fileManager {
+    background-color: #0F1728;
+    color: #E8EEFF;
+}
+
+QLabel#fileManagerTitle {
+    color: #48DDF5;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+QLabel#fileManagerSubtitle {
+    color: #8B9AB8;
+    font-size: 12px;
+}
+
+QLabel#fileManagerLocation {
+    color: #48DDF5;
+    font-size: 11px;
+    padding: 5px;
+}
+
+QLabel#fileManagerStatus {
+    color: #8B9AB8;
+    font-size: 11px;
+}
+
+/* FILE MANAGER INPUT */
+
+QLineEdit#fileManagerPath {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 8px;
+    color: #E8EEFF;
+    padding: 10px;
+    font-size: 12px;
+}
+
+QLineEdit#fileManagerPath:focus {
+    border: 1px solid #48DDF5;
+}
+
+/* FILE MANAGER BUTTONS */
+
+QWidget#fileManager QPushButton {
+    background-color: #17243B;
+    border: 1px solid #304362;
+    border-radius: 8px;
+    color: #DCE8FF;
+    padding: 8px 13px;
+}
+
+QWidget#fileManager QPushButton:hover {
+    background-color: #263D60;
+    border: 1px solid #48DDF5;
+}
+
+QWidget#fileManager QPushButton:disabled {
+    color: #687895;
+    background-color: #111A2C;
+    border-color: #253450;
+}
+
+/* FILE AND FOLDER VIEW */
+
+QTreeView#fileManagerTree {
+    background-color: #111A2C;
+    alternate-background-color: #162239;
+    border: 1px solid #304362;
+    border-radius: 8px;
+    color: #DCE8FF;
+    selection-background-color: #17465C;
+    selection-color: #FFFFFF;
+    outline: none;
+}
+
+QTreeView#fileManagerTree::item {
+    padding: 7px;
+}
+
+QTreeView#fileManagerTree::item:hover {
+    background-color: #263D60;
+}
+
+QTreeView#fileManagerTree::item:selected {
+    background-color: #17465C;
+    color: #FFFFFF;
+}
+
+QTreeView#fileManagerTree QHeaderView::section {
+    background-color: #17243B;
+    color: #48DDF5;
+    border: none;
+    border-bottom: 1px solid #304362;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
 /* DIALOGS */
 
 QMessageBox {
@@ -362,4 +465,25 @@ QScrollBar::handle:vertical:hover {
 QScrollBar::add-line:vertical,
 QScrollBar::sub-line:vertical {
     height: 0;
+}
+
+QScrollBar:horizontal {
+    background-color: #10172A;
+    height: 8px;
+    margin: 0;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #304362;
+    border-radius: 4px;
+    min-width: 25px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #48DDF5;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
 }
