@@ -1,8 +1,8 @@
 # Novux — Futuristic Desktop Environment
 
-Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, process management, and a clean, dark-themed design.
+Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, process management, file browsing, and a clean, dark-themed design.
 
-The project is currently under active development, with its desktop interface, application window management, System Monitor, and Process Manager implemented.
+The project is currently under active development, with its desktop interface, application window management, System Monitor, Process Manager, and File Manager implemented.
 
 ## Implemented Features
 
@@ -37,6 +37,16 @@ The project is currently under active development, with its desktop interface, a
 - **End Process** — Allows users to terminate selected processes with a confirmation prompt.
 - **Process Protection** — Includes basic safeguards for selected protected processes.
 
+### File Manager
+- **File and Folder Browser** — Displays files and folders from the local file system.
+- **Directory Navigation** — Browse through folders and directories.
+- **Back and Forward Navigation** — Move between previously visited locations.
+- **Parent Directory Navigation** — Navigate to the parent folder.
+- **Path Input** — Enter a directory path to navigate directly to a location.
+- **File Opening** — Open files using their default Windows applications.
+- **Manual Refresh** — Refresh the displayed file and folder list.
+- **File System View** — Uses a tree-based interface to organize and display files and folders.
+
 ## Technologies Used
 
 - **Python 3.14** — Main programming language.
@@ -53,7 +63,8 @@ Novux/
 ├── apps/
 │   ├── __init__.py
 │   ├── system_monitor.py
-│   └── process_manager.py
+│   ├── process_manager.py
+│   └── file_manager.py
 ├── desktop/
 │   ├── __init__.py
 │   └── desktop.py
@@ -118,10 +129,11 @@ python main.py
 | Window Management | Completed |
 | System Monitor | Implemented and Tested |
 | Process Manager | Implemented |
+| File Manager | Implemented |
 
 ## Project Status
 
-Novux is currently in active development. The desktop environment, application window management, System Monitor, and Process Manager have been implemented.
+Novux is currently in active development. The desktop environment, application window management, System Monitor, Process Manager, and File Manager have been implemented.
 
 Future development will focus on expanding the desktop environment with additional built-in applications and system utilities, improving existing functionality, and introducing more advanced desktop features.
 
