@@ -15,6 +15,7 @@ from PySide6.QtWidgets import (
 
 from apps.system_monitor import SystemMonitor
 from apps.process_manager import ProcessManager
+from apps.file_manager import FileManager
 
 
 class NovuxDesktop(QWidget):
@@ -217,17 +218,6 @@ class NovuxDesktop(QWidget):
                 ],
             },
 
-            "files": {
-                "title": "File Manager",
-                "description": "Manage and organize your files.",
-                "features": [
-                    "Directory Navigation",
-                    "File Organization",
-                    "Folder Management",
-                    "Storage Information",
-                ],
-            },
-
             "terminal": {
                 "title": "Novux Terminal",
                 "description": "Your command-line environment.",
@@ -341,7 +331,11 @@ class NovuxDesktop(QWidget):
         window.setProperty("app_id", app_id)
         window.setWindowTitle(title)
 
-        if app_id == "processes":
+        # Load the selected application
+        if app_id == "files":
+            content = FileManager()
+
+        elif app_id == "processes":
             content = ProcessManager()
 
         elif app_id == "monitor":
@@ -352,9 +346,11 @@ class NovuxDesktop(QWidget):
 
         window.setWidget(content)
 
-        if app_id in ("processes", "monitor"):
+        # Application window dimensions
+        if app_id in ("files", "processes", "monitor"):
             window.setMinimumSize(750, 480)
             window.resize(950, 650)
+
         else:
             window.setMinimumSize(360, 260)
             window.resize(520, 380)
