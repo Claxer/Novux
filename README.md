@@ -1,8 +1,8 @@
 # Novux — Futuristic Desktop Environment
 
-Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, process management, file browsing, and a clean, dark-themed design.
+Novux is a Python-based desktop environment designed to simulate a modern, futuristic operating system experience. Built using **Python 3.14 and PySide6**, the project focuses on creating an interactive desktop interface with application windows, system monitoring, process management, file browsing, terminal access, and a clean, dark-themed design.
 
-The project is currently under active development, with its desktop interface, application window management, System Monitor, Process Manager, and File Manager implemented.
+The project is currently under active development, with its desktop interface, application window management, System Monitor, Process Manager, File Manager, and Terminal implemented.
 
 ## Implemented Features
 
@@ -47,6 +47,16 @@ The project is currently under active development, with its desktop interface, a
 - **Manual Refresh** — Refresh the displayed file and folder list.
 - **File System View** — Uses a tree-based interface to organize and display files and folders.
 
+### Terminal
+- **Terminal Interface** — Provides a built-in command-line interface within the Novux desktop environment.
+- **Command Execution** — Executes supported commands through the Windows Command Prompt.
+- **Built-in Commands** — Includes `help`, `clear`, `cls`, `pwd`, `dir`, `ls`, and `cd`.
+- **Directory Navigation** — Navigate between directories using relative or absolute paths.
+- **Working Directory** — Displays the current terminal directory.
+- **Command Output** — Displays command results and output inside the terminal window.
+- **Command Input** — Accepts commands through a dedicated input field and Run button.
+- **Execution Timeout** — Applies a time limit to external command execution.
+
 ## Technologies Used
 
 - **Python 3.14** — Main programming language.
@@ -64,7 +74,8 @@ Novux/
 │   ├── __init__.py
 │   ├── system_monitor.py
 │   ├── process_manager.py
-│   └── file_manager.py
+│   ├── file_manager.py
+│   └── terminal.py
 ├── desktop/
 │   ├── __init__.py
 │   └── desktop.py
@@ -130,12 +141,15 @@ python main.py
 | System Monitor | Implemented and Tested |
 | Process Manager | Implemented |
 | File Manager | Implemented |
+| Terminal | Implemented |
 
 ## Project Status
 
-Novux is currently in active development. The desktop environment, application window management, System Monitor, Process Manager, and File Manager have been implemented.
+Novux is currently in active development. The desktop environment, application window management, System Monitor, Process Manager, File Manager, and Terminal have been implemented.
 
-Future development will focus on expanding the desktop environment with additional built-in applications and system utilities, improving existing functionality, and introducing more advanced desktop features.
+The built-in Terminal adds command-line functionality to the desktop environment by allowing users to execute supported commands and navigate directories without leaving Novux.
+
+Future development will focus on testing and improving the existing applications, expanding the desktop environment with additional built-in applications and system utilities, and introducing more advanced desktop features.
 
 ## License
 
