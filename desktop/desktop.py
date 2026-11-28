@@ -16,6 +16,7 @@ from PySide6.QtWidgets import (
 from apps.system_monitor import SystemMonitor
 from apps.process_manager import ProcessManager
 from apps.file_manager import FileManager
+from apps.terminal import Terminal
 
 
 class NovuxDesktop(QWidget):
@@ -218,17 +219,6 @@ class NovuxDesktop(QWidget):
                 ],
             },
 
-            "terminal": {
-                "title": "Novux Terminal",
-                "description": "Your command-line environment.",
-                "features": [
-                    "Custom Commands",
-                    "Directory Navigation",
-                    "System Information",
-                    "Command Execution",
-                ],
-            },
-
             "settings": {
                 "title": "System Settings",
                 "description": "Configure your Novux environment.",
@@ -335,6 +325,9 @@ class NovuxDesktop(QWidget):
         if app_id == "files":
             content = FileManager()
 
+        elif app_id == "terminal":
+            content = Terminal()
+
         elif app_id == "processes":
             content = ProcessManager()
 
@@ -347,7 +340,7 @@ class NovuxDesktop(QWidget):
         window.setWidget(content)
 
         # Application window dimensions
-        if app_id in ("files", "processes", "monitor"):
+        if app_id in ("files", "terminal", "processes", "monitor"):
             window.setMinimumSize(750, 480)
             window.resize(950, 650)
 
